@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-brand-dark: #1A2A80;
+  --color-brand: #3B38A0;
+  --color-brand-muted: #7A85C1;
+  --color-brand-soft: #B2B0E8;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  direction: rtl;
+  font-family: "Heebo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #F3F2FF; 
+  color: #0f172a;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes whyCardBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.why-card-border {
+  position: relative;
+  border-radius: 1rem;
+}
+
+/* הגרדיאנט – רק על הבורדר */
+.why-card-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px; /* עובי הבורדר */
+  border-radius: inherit;
+  background-image: linear-gradient(120deg, #1A2A80, #B2B0E8);
+  background-size: 220% 220%;
+  animation: whyCardBorder 5s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* פנים הקארד – רקע לבן סטטי */
+.why-card-inner {
+  position: relative;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.9);
+}
+
