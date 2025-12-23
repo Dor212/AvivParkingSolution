@@ -1,4 +1,3 @@
-import React from "react";
 
 const BUSINESS = {
     name: "אביב פתרונות חניה",
