@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="96" y1="96" x2="416" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b88248"/>
+      <stop offset="0.52" stop-color="#e9ba6c"/>
+      <stop offset="1" stop-color="#e9d37e"/>
+    </linearGradient>
+    <linearGradient id="goldLite" x1="160" y1="140" x2="360" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e9d37e" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#b88248" stop-opacity="0.22"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Premium gear (outline only) -->
+  <path d="M 444.00 256.00 A 188 188 0 0 1 438.38 301.61 L 404.36 304.21 A 156 156 0 0 1 388.24 338.76 L 408.10 366.50 A 188 188 0 0 1 376.74 400.10 L 347.69 382.21 A 156 156 0 0 1 314.34 400.68 L 314.10 434.80 A 188 188 0 0 1 268.98 443.55 L 256.00 412.00 A 156 156 0 0 1 218.15 407.34 L 197.90 434.80 A 188 188 0 0 1 156.26 415.36 L 164.31 382.21 A 156 156 0 0 1 136.43 356.19 L 103.90 366.50 A 188 188 0 0 1 81.64 326.30 L 107.64 304.21 A 156 156 0 0 1 100.37 266.77 L 68.00 256.00 A 188 188 0 0 1 73.62 210.39 L 107.64 207.79 A 156 156 0 0 1 123.76 173.24 L 103.90 145.50 A 188 188 0 0 1 135.26 111.90 L 164.31 129.79 A 156 156 0 0 1 197.66 111.32 L 197.90 77.20 A 188 188 0 0 1 243.02 68.45 L 256.00 100.00 A 156 156 0 0 1 293.85 104.66 L 314.10 77.20 A 188 188 0 0 1 355.74 96.64 L 347.69 129.79 A 156 156 0 0 1 375.57 155.81 L 408.10 145.50 A 188 188 0 0 1 430.36 185.70 L 404.36 207.79 A 156 156 0 0 1 411.63 245.23 L 444.00 256.00 Z" stroke="url(#gold)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity="0.94"/>
+  <path d="M 444.00 256.00 A 188 188 0 0 1 438.38 301.61 L 404.36 304.21 A 156 156 0 0 1 388.24 338.76 L 408.10 366.50 A 188 188 0 0 1 376.74 400.10 L 347.69 382.21 A 156 156 0 0 1 314.34 400.68 L 314.10 434.80 A 188 188 0 0 1 268.98 443.55 L 256.00 412.00 A 156 156 0 0 1 218.15 407.34 L 197.90 434.80 A 188 188 0 0 1 156.26 415.36 L 164.31 382.21 A 156 156 0 0 1 136.43 356.19 L 103.90 366.50 A 188 188 0 0 1 81.64 326.30 L 107.64 304.21 A 156 156 0 0 1 100.37 266.77 L 68.00 256.00 A 188 188 0 0 1 73.62 210.39 L 107.64 207.79 A 156 156 0 0 1 123.76 173.24 L 103.90 145.50 A 188 188 0 0 1 135.26 111.90 L 164.31 129.79 A 156 156 0 0 1 197.66 111.32 L 197.90 77.20 A 188 188 0 0 1 243.02 68.45 L 256.00 100.00 A 156 156 0 0 1 293.85 104.66 L 314.10 77.20 A 188 188 0 0 1 355.74 96.64 L 347.69 129.79 A 156 156 0 0 1 375.57 155.81 L 408.10 145.50 A 188 188 0 0 1 430.36 185.70 L 404.36 207.79 A 156 156 0 0 1 411.63 245.23 L 444.00 256.00 Z" stroke="url(#goldLite)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+
+  <!-- Inner ring -->
+  <circle cx="256" cy="256" r="94" stroke="url(#gold)" stroke-width="18" stroke-linecap="round" opacity="0.70"/>
+  <circle cx="256" cy="256" r="94" stroke="url(#goldLite)" stroke-width="10" stroke-linecap="round" opacity="0.42"/>
+
+  <!-- Subtle highlight spark (still minimal) -->
+  <path d="M 150 176 L 164 176 M 157 169 L 157 183" stroke="url(#goldLite)" stroke-width="10" stroke-linecap="round" opacity="0.30"/>
+</svg>

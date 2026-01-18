@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
-import MaintenancePage from "./pages/MaintenancePage";
+import MaintenancePage from "./pages/MaintenancePage/MaintenancePage";
 import ProductsPage from "./pages/ProductsPage";
 import ContactPage from "./pages/ContactPage";
 import SiteHeader from "./sections/Layout/SiteHeader";
@@ -27,13 +27,16 @@ const App: React.FC = () => {
       <CookieConsentBanner />
 
       <div className="relative flex flex-col min-h-screen">
-        <div
-          className="fixed inset-0 bg-fixed bg-center bg-cover -z-10"
-          style={{
-            backgroundImage: "url('/BGA.png')",
-          }}
-        />
-        <div className="fixed inset-0 -z-10 bg-white/60" />
+        <div className="fixed inset-0 -z-10">
+          <div
+            className="absolute inset-0 bg-fixed bg-center bg-cover md:hidden"
+            style={{ backgroundImage: "url('/BGT.png')" }}
+          />
+          <div
+            className="absolute inset-0 hidden bg-fixed bg-center bg-cover md:block"
+            style={{ backgroundImage: "url('/BGTM.png')" }}
+          />
+        </div>
 
         <SiteHeader />
 

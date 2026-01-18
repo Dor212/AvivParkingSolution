@@ -15,8 +15,17 @@ type Shot = {
     imageSrc: string;
 };
 
-const ACCENT = "#1A2A80" as const;
-const TEXT = "#1F2937" as const;
+const GOLD_1 = "#b88248" as const;
+const GOLD_2 = "#e9ba6c" as const;
+const GOLD_3 = "#e9d37e" as const;
+/* 
+const BLACK_1 = "#1e1f24" as const;
+const BLACK_2 = "#6e6c6d" as const;
+const BLACK_3 = "#1e1f24" as const; */
+
+const SILVER = "#cfd2d6" as const;
+
+const TEXT = "rgba(255,255,255,0.78)" as const;
 
 const easeCurve = [0.22, 1, 0.36, 1] as const;
 
@@ -85,13 +94,8 @@ export default function GallerySection({
 
     const activeShot = SHOTS[activeIndex];
 
-    const goNext = () => {
-        setActiveIndex((prev) => (prev + 1) % SHOTS.length);
-    };
-
-    const goPrev = () => {
-        setActiveIndex((prev) => (prev - 1 + SHOTS.length) % SHOTS.length);
-    };
+    const goNext = () => setActiveIndex((prev) => (prev + 1) % SHOTS.length);
+    const goPrev = () => setActiveIndex((prev) => (prev - 1 + SHOTS.length) % SHOTS.length);
 
     const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
         touchStartX.current = e.touches[0].clientX;
@@ -107,11 +111,8 @@ export default function GallerySection({
         const deltaX = touchStartX.current - touchEndX.current;
         const threshold = 40;
         if (Math.abs(deltaX) > threshold) {
-            if (deltaX > 0) {
-                goNext();
-            } else {
-                goPrev();
-            }
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            deltaX > 0 ? goNext() : goPrev();
         }
         touchStartX.current = null;
         touchEndX.current = null;
@@ -119,9 +120,9 @@ export default function GallerySection({
 
     return (
         <section id={id} dir="rtl" className={`py-10 md:py-14 ${className}`}>
-            <div className="max-w-5xl mx-auto px-4">
+            <div className="max-w-5xl px-4 mx-auto">
                 <motion.div
-                    className="mb-6 md:mb-8 text-center"
+                    className="mb-6 text-center md:mb-8"
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.4 }}
@@ -129,8 +130,8 @@ export default function GallerySection({
                     custom={0}
                 >
                     <motion.h2
-                        className="text-xl md:text-2xl font-semibold mb-3"
-                        style={{ color: ACCENT }}
+                        className="mb-3 text-xl font-semibold md:text-2xl"
+                        style={{ color: SILVER }}
                         variants={fadeUp}
                         custom={0}
                     >
@@ -142,34 +143,28 @@ export default function GallerySection({
                         variants={fadeUp}
                         custom={1}
                     >
-                        <span className="w-2 h-2 rounded-full bg-brand-soft" />
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "rgba(233,211,126,0.45)" }} />
                         <motion.div
                             className="h-[3px] w-32 md:w-40 rounded-full"
                             style={{
-                                backgroundImage:
-                                    "linear-gradient(90deg, rgba(91,74,232,0), rgba(91,74,232,0.95), rgba(91,74,232,0))",
+                                backgroundImage: `linear-gradient(90deg, rgba(184,130,72,0), ${GOLD_1}, ${GOLD_2}, ${GOLD_3}, rgba(184,130,72,0))`,
                                 backgroundSize: "200% 100%",
+                                opacity: 0.9,
                             }}
-                            animate={{
-                                backgroundPositionX: ["0%", "100%", "0%"],
-                            }}
-                            transition={{
-                                duration: 7,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
+                            animate={{ backgroundPositionX: ["0%", "100%", "0%"] }}
+                            transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
                         />
-                        <span className="w-2 h-2 rounded-full bg-brand-soft" />
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "rgba(233,211,126,0.45)" }} />
                     </motion.div>
 
                     <motion.p
-                        className="mt-1 text-sm md:text-base max-w-2xl mx-auto"
+                        className="max-w-2xl mx-auto mt-1 text-sm md:text-base"
                         style={{ color: TEXT }}
                         variants={fadeUp}
                         custom={2}
                     >
-                        צילומים אמיתיים מהאתרים שאנחנו מתחזקים: מכפילי חניה, מתקנים טמונים, מתקנים חיצוניים
-                        ומערכות מורכבות. התחזוקה שלנו מתמקדת בפרטים הקטנים – כדי שאתם לא תצטרכו לחשוב על זה בכלל.
+                        צילומים אמיתיים מהאתרים שאנחנו מתחזקים: מכפילי חניה, מתקנים טמונים, מתקנים חיצוניים ומערכות מורכבות. התחזוקה
+                        שלנו מתמקדת בפרטים הקטנים – כדי שאתם לא תצטרכו לחשוב על זה בכלל.
                     </motion.p>
                 </motion.div>
 
@@ -191,20 +186,24 @@ export default function GallerySection({
                             className="pointer-events-none absolute inset-0 rounded-[2rem]"
                             style={{
                                 background:
-                                    "radial-gradient(circle at 50% 0%, rgba(91,74,232,0.35), transparent 60%)",
-                                opacity: 0.9,
+                                    `radial-gradient(circle at 50% 0%, rgba(233,211,126,0.22), rgba(207,210,214,0.10), transparent 62%)`,
+                                opacity: 0.95,
+                            }}
+                        />
+
+                        <div
+                            className="absolute pointer-events-none -inset-4 blur-2xl opacity-60"
+                            style={{
+                                backgroundImage: `radial-gradient(520px 280px at 50% 18%, rgba(233,211,126,0.18), rgba(0,0,0,0) 62%)`,
                             }}
                         />
 
                         <div className="absolute inset-0">
                             {SHOTS.map((shot, index) => {
                                 const total = SHOTS.length;
-                                const relative =
-                                    (index - activeIndex + total) % total;
+                                const relative = (index - activeIndex + total) % total;
 
-                                if (relative !== 0 && relative !== 1 && relative !== total - 1) {
-                                    return null;
-                                }
+                                if (relative !== 0 && relative !== 1 && relative !== total - 1) return null;
 
                                 const isActive = relative === 0;
                                 const isNext = relative === 1;
@@ -217,14 +216,7 @@ export default function GallerySection({
                                 let opacity = 1;
                                 let zIndex = 30;
 
-                                if (isActive) {
-                                    x = 0;
-                                    y = 0;
-                                    scale = 1;
-                                    rotate = 0;
-                                    opacity = 1;
-                                    zIndex = 30;
-                                } else if (isNext) {
+                                if (isNext) {
                                     x = -22;
                                     y = 18;
                                     scale = 0.94;
@@ -247,40 +239,39 @@ export default function GallerySection({
                                         style={{ zIndex }}
                                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                         animate={{ opacity, scale, x, y, rotate }}
-                                        transition={{
-                                            duration: 0.6,
-                                            ease: easeCurve,
-                                        }}
+                                        transition={{ duration: 0.6, ease: easeCurve }}
                                         whileHover={
                                             isActive
-                                                ? {
-                                                    y: -4,
-                                                    transition: {
-                                                        duration: 0.25,
-                                                    },
-                                                }
+                                                ? { y: -4, transition: { duration: 0.25 } }
                                                 : undefined
                                         }
                                     >
                                         <div
-                                            className="w-full h-full rounded-[1.75rem] overflow-hidden bg-white/90 border shadow-[0_22px_45px_rgba(15,23,42,0.32)]"
+                                            className="w-full h-full rounded-[1.75rem] overflow-hidden border backdrop-blur-sm"
                                             style={{
+                                                backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04))`,
                                                 borderColor: isActive
-                                                    ? "rgba(91,74,232,0.9)"
-                                                    : "rgba(148,163,184,0.9)",
+                                                    ? "rgba(233,211,126,0.55)"
+                                                    : "rgba(207,210,214,0.22)",
                                                 boxShadow: isActive
-                                                    ? "0 0 32px rgba(91,74,232,0.7), 0 22px 45px rgba(15,23,42,0.35)"
-                                                    : "0 18px 36px rgba(15,23,42,0.28)",
+                                                    ? "0 0 36px rgba(233,211,126,0.22), 0 22px 45px rgba(0,0,0,0.40)"
+                                                    : "0 18px 36px rgba(0,0,0,0.34)",
                                             }}
                                         >
                                             <div className="relative w-full h-full">
                                                 <img
                                                     src={shot.imageSrc}
                                                     alt={shot.title}
-                                                    className="w-full h-full object-cover"
+                                                    className="object-cover w-full h-full"
                                                     loading="lazy"
                                                 />
-                                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
+                                                <div
+                                                    className="absolute inset-0 pointer-events-none"
+                                                    style={{
+                                                        backgroundImage:
+                                                            "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.08), rgba(0,0,0,0.48))",
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     </motion.div>
@@ -292,7 +283,13 @@ export default function GallerySection({
                             <motion.button
                                 type="button"
                                 onClick={goNext}
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/85 border border-brand-soft/70 text-sm shadow-md hover:bg-white hover:shadow-lg transition"
+                                className="flex items-center justify-center w-8 h-8 text-sm transition border rounded-full shadow-md backdrop-blur-md"
+                                style={{
+                                    borderColor: "rgba(233,211,126,0.38)",
+                                    backgroundImage: `linear-gradient(180deg, rgba(30,31,36,0.35), rgba(30,31,36,0.18))`,
+                                    color: "rgba(255,255,255,0.92)",
+                                    boxShadow: "0 10px 22px rgba(0,0,0,0.35)",
+                                }}
                                 aria-label="תמונה הבאה"
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 initial={{ opacity: 0, scale: 0.8 }}
@@ -302,10 +299,17 @@ export default function GallerySection({
                             >
                                 ‹
                             </motion.button>
+
                             <motion.button
                                 type="button"
                                 onClick={goPrev}
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/85 border border-brand-soft/70 text-sm shadow-md hover:bg-white hover:shadow-lg transition"
+                                className="flex items-center justify-center w-8 h-8 text-sm transition border rounded-full shadow-md backdrop-blur-md"
+                                style={{
+                                    borderColor: "rgba(233,211,126,0.38)",
+                                    backgroundImage: `linear-gradient(180deg, rgba(30,31,36,0.35), rgba(30,31,36,0.18))`,
+                                    color: "rgba(255,255,255,0.92)",
+                                    boxShadow: "0 10px 22px rgba(0,0,0,0.35)",
+                                }}
                                 aria-label="תמונה קודמת"
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 initial={{ opacity: 0, scale: 0.8 }}
@@ -319,7 +323,7 @@ export default function GallerySection({
                     </div>
 
                     <motion.div
-                        className="text-center max-w-xl"
+                        className="max-w-xl text-center"
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: false, amount: 0.4 }}
@@ -327,35 +331,49 @@ export default function GallerySection({
                         custom={4}
                         key={activeShot.id}
                     >
-                        <p className="text-[0.8rem] md:text-xs font-semibold text-brand-muted mb-1.5">
+                        <p
+                            className="text-[0.8rem] md:text-xs font-semibold mb-1.5"
+                            style={{ color: "rgba(207,210,214,0.78)" }}
+                        >
                             {activeShot.title}
                         </p>
                         <h3
                             className="text-sm md:text-base font-semibold mb-1.5"
-                            style={{ color: ACCENT }}
+                            style={{ color: SILVER }}
                         >
                             {activeShot.subtitle}
                         </h3>
-                        <p className="text-xs md:text-[0.95rem] leading-relaxed text-slate-800">
+                        <p
+                            className="text-xs md:text-[0.95rem] leading-relaxed"
+                            style={{ color: "rgba(255,255,255,0.80)" }}
+                        >
                             {activeShot.description}
                         </p>
 
-                        <div className="mt-3 flex items-center justify-center gap-2">
-                            {SHOTS.map((shot, index) => (
-                                <button
-                                    key={shot.id}
-                                    type="button"
-                                    onClick={() => setActiveIndex(index)}
-                                    className="relative h-1.5 w-4 rounded-full overflow-hidden bg-slate-200"
-                                >
-                                    <span
-                                        className={`absolute inset-y-0 rounded-full transition-all ${index === activeIndex
-                                                ? "right-0 w-full bg-gradient-to-l from-brand-dark via-brand-soft to-brand"
-                                                : "right-1/2 w-0 bg-brand-soft"
-                                            }`}
-                                    />
-                                </button>
-                            ))}
+                        <div className="flex items-center justify-center gap-2 mt-3">
+                            {SHOTS.map((shot, index) => {
+                                const isActive = index === activeIndex;
+                                return (
+                                    <button
+                                        key={shot.id}
+                                        type="button"
+                                        onClick={() => setActiveIndex(index)}
+                                        className="relative h-1.5 w-4 rounded-full overflow-hidden"
+                                        style={{ backgroundColor: "rgba(207,210,214,0.22)" }}
+                                    >
+                                        <span
+                                            className="absolute inset-y-0 transition-all rounded-full"
+                                            style={{
+                                                right: isActive ? 0 : "50%",
+                                                width: isActive ? "100%" : 0,
+                                                backgroundImage: isActive
+                                                    ? `linear-gradient(90deg, ${GOLD_1}, ${GOLD_2}, ${GOLD_3})`
+                                                    : `linear-gradient(90deg, rgba(233,211,126,0.55), rgba(233,211,126,0.0))`,
+                                            }}
+                                        />
+                                    </button>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 </motion.div>

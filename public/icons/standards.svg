@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" aria-label="Standards icon">
+  <defs>
+    <linearGradient id="gold" x1="80" y1="64" x2="432" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b88248"/>
+      <stop offset="0.5" stop-color="#e9ba6c"/>
+      <stop offset="1" stop-color="#e9d37e"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="64" y1="448" x2="448" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b88248" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#e9ba6c" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#e9d37e" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.6" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.25 0" result="c"/>
+      <feMerge>
+        <feMergeNode in="c"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#softGlow)" stroke-linecap="round" stroke-linejoin="round">
+
+    <rect x="148" y="112" width="216" height="300" rx="28" stroke="url(#gold)" stroke-width="18"/>
+    <path d="M206 112c0-20 16-36 36-36h28c20 0 36 16 36 36v24H206v-24Z"
+          stroke="#cfd2d6" stroke-opacity="0.9" stroke-width="14"/>
+    <path d="M204 258l28 28 56-64" stroke="url(#gold2)" stroke-width="18"/>
+    <path d="M196 330h120" stroke="#cfd2d6" stroke-opacity="0.7" stroke-width="14"/>
+    <path d="M196 370h88" stroke="#cfd2d6" stroke-opacity="0.55" stroke-width="14"/>
+    <circle cx="356" cy="356" r="40" stroke="url(#gold2)" stroke-width="16"/>
+    <path d="M340 356l10 10 22-26" stroke="#cfd2d6" stroke-opacity="0.9" stroke-width="14"/>
+
+  </g>
+</svg>

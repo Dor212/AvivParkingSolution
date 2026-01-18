@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { FaShieldAlt } from "react-icons/fa";
 
 type ProductsPageProps = {
     className?: string;
@@ -18,8 +19,14 @@ type ProductCategory = {
     items: ProductItem[];
 };
 
-const ACCENT = "#1A2A80" as const;
-const TEXT = "#1F2937" as const;
+const SILVER = "#cfd2d6" as const;
+const GOLD_1 = "#b88248" as const;
+const GOLD_2 = "#e9ba6c" as const;
+const GOLD_3 = "#e9d37e" as const;
+
+const TEXT = "rgba(255,255,255,0.78)" as const;
+const MUTED = "rgba(207,210,214,0.72)" as const;
+
 const WHATSAPP_NUMBER = "972500000000";
 
 const easeCurve = [0.22, 1, 0.36, 1] as const;
@@ -29,11 +36,7 @@ const fadeUp: Variants = {
     show: (i = 0) => ({
         opacity: 1,
         y: 0,
-        transition: {
-            duration: 0.6,
-            delay: 0.12 * i,
-            ease: easeCurve,
-        },
+        transition: { duration: 0.6, delay: 0.12 * i, ease: easeCurve },
     }),
 };
 
@@ -43,11 +46,7 @@ const cardVariants: Variants = {
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: {
-            duration: 0.5,
-            delay: 0.08 * i,
-            ease: easeCurve,
-        },
+        transition: { duration: 0.5, delay: 0.08 * i, ease: easeCurve },
     }),
 };
 
@@ -86,7 +85,7 @@ const CATEGORIES: ProductCategory[] = [
             {
                 label: "חניון קרוסלה רוטרי",
                 description:
-                    "מערכת אנכית שבה הרכבים מסתדרים אחד מעל השני ומסתובבים כמו קרוסלה. התחזוקה מתמקדת במנועים, שרשראות, מנגנוני עצירה ומערכות בקרה כדי שהעלאה והורדה יהיו מדויקות ובטוחות.",
+                    "מערכת אנכית שבה הרכבים מסתדרים אחד מעל השני ומסתובבים כמו קרוסלה. התחזוקה מתמקדת במנועים, שרשראות, מנגנוני עצירה ומערכות בקרה כדי שהעלאה וההורדה יהיו מדויקות ובטוחות.",
             },
             {
                 label: "חניוני מגדל או כוורת רובוטית",
@@ -102,47 +101,83 @@ function CategoryCard({ category, index }: { category: ProductCategory; index: n
         <motion.section
             variants={cardVariants}
             custom={index}
-            className="rounded-3xl bg-gradient-to-b from-slate-50/95 via-white to-slate-50/80 border border-slate-200/75 px-4 py-5 md:px-6 md:py-6 shadow-[0_18px_40px_rgba(15,23,42,0.12)]"
+            className="relative px-4 py-5 overflow-hidden border rounded-3xl md:px-6 md:py-6 backdrop-blur-md"
+            style={{
+                backgroundImage: "linear-gradient(180deg, rgba(30,31,36,0.62), rgba(30,31,36,0.38))",
+                borderColor: "rgba(233,211,126,0.18)",
+                boxShadow: "0 18px 40px rgba(0,0,0,0.42)",
+            }}
         >
-            <div className="flex flex-col md:flex-row md:items-start md:gap-6 lg:gap-8">
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+                <div
+                    className="absolute -top-16 left-1/2 -translate-x-1/2 h-52 w-[min(760px,92vw)] rounded-full blur-3xl opacity-60"
+                    style={{
+                        background:
+                            "radial-gradient(circle at 50% 20%, rgba(233,211,126,0.16), rgba(233,186,108,0.10), transparent 70%)",
+                    }}
+                />
+                <div
+                    className="absolute -bottom-20 left-1/2 -translate-x-1/2 h-56 w-[min(760px,92vw)] rounded-full blur-3xl opacity-45"
+                    style={{
+                        background:
+                            "radial-gradient(circle at 50% 70%, rgba(207,210,214,0.10), rgba(184,130,72,0.08), transparent 70%)",
+                    }}
+                />
+            </div>
+
+            <div className="relative flex flex-col md:flex-row md:items-start md:gap-6 lg:gap-8">
                 <div className="md:w-[34%] flex flex-col mb-4 md:mb-0">
                     <div className="inline-flex items-center gap-2 mb-2">
-                        <span className="w-6 h-6 rounded-2xl bg-brand-soft/20 border border-brand-soft/60 flex items-center justify-center text-[0.7rem] font-semibold text-brand-dark shadow-[0_0_12px_rgba(26,42,128,0.38)]">
+                        <span
+                            className="w-7 h-7 rounded-2xl border flex items-center justify-center text-[0.7rem] font-semibold"
+                            style={{
+                                backgroundImage: `linear-gradient(90deg, ${GOLD_1}, ${GOLD_2}, ${GOLD_3})`,
+                                borderColor: "rgba(233,211,126,0.18)",
+                                color: "rgba(0,0,0,0.86)",
+                                boxShadow: "0 10px 20px rgba(0,0,0,0.40)",
+                            }}
+                        >
                             {index + 1}
                         </span>
-                        <span className="text-[0.8rem] text-brand-muted">
+                        <span className="text-[0.8rem]" style={{ color: MUTED }}>
                             סוג מערכת חניה
                         </span>
                     </div>
-                    <h2
-                        className="text-base md:text-lg font-semibold mb-1"
-                        style={{ color: ACCENT }}
-                    >
+
+                    <h2 className="mb-1 text-base font-semibold md:text-lg" style={{ color: SILVER }}>
                         {category.title}
                     </h2>
-                    <p className="text-[0.85rem] md:text-sm text-slate-700">
+
+                    <p className="text-[0.85rem] md:text-sm" style={{ color: TEXT }}>
                         {category.subtitle}
                     </p>
 
-                    <div className="mt-3 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-brand-soft" />
+                    <div className="flex items-center gap-2 mt-3">
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "rgba(233,211,126,0.55)" }} />
                         <motion.span
                             className="h-[3px] w-20 md:w-24 rounded-full"
                             style={{
-                                backgroundImage:
-                                    "linear-gradient(90deg, rgba(26,42,128,0), rgba(91,74,232,0.9), rgba(41,98,255,0.9), rgba(26,42,128,0))",
+                                backgroundImage: `linear-gradient(90deg, rgba(184,130,72,0), ${GOLD_1}, ${GOLD_2}, ${GOLD_3}, rgba(184,130,72,0))`,
                                 backgroundSize: "220% 100%",
+                                opacity: 0.9,
                             }}
-                            animate={{
-                                backgroundPositionX: ["0%", "100%", "0%"],
-                            }}
-                            transition={{
-                                duration: 8,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
+                            animate={{ backgroundPositionX: ["0%", "100%", "0%"] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                         />
-                        <span className="w-2 h-2 rounded-full bg-brand-soft" />
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "rgba(233,211,126,0.55)" }} />
+                    </div>
+
+                    <div className="mt-3">
+                        <span
+                            className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[0.74rem] border"
+                            style={{
+                                color: MUTED,
+                                borderColor: "rgba(207,210,214,0.16)",
+                                backgroundImage: "linear-gradient(180deg, rgba(30,31,36,0.55), rgba(30,31,36,0.30))",
+                            }}
+                        >
+                            תחזוקה + תיקון + התאמה
+                        </span>
                     </div>
                 </div>
 
@@ -152,18 +187,20 @@ function CategoryCard({ category, index }: { category: ProductCategory; index: n
                             key={item.label}
                             variants={cardVariants}
                             custom={index + i + 0.5}
-                            className="rounded-2xl border bg-white/98 px-4 py-3.5 md:px-4.5 md:py-4 shadow-[0_14px_30px_rgba(15,23,42,0.12)]"
+                            className="rounded-2xl border px-4 py-3.5 md:px-4.5 md:py-4 backdrop-blur-md"
                             style={{
-                                borderColor: "rgba(26,42,128,0.22)",
+                                backgroundImage:
+                                    i % 2 === 0
+                                        ? "linear-gradient(180deg, rgba(30,31,36,0.66), rgba(30,31,36,0.42))"
+                                        : "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))",
+                                borderColor: i % 2 === 0 ? "rgba(233,211,126,0.20)" : "rgba(207,210,214,0.16)",
+                                boxShadow: "0 14px 30px rgba(0,0,0,0.38)",
                             }}
                         >
-                            <h3
-                                className="text-sm md:text-[0.95rem] font-semibold mb-1.5"
-                                style={{ color: ACCENT }}
-                            >
+                            <h3 className="text-sm md:text-[0.95rem] font-semibold mb-1.5" style={{ color: SILVER }}>
                                 {item.label}
                             </h3>
-                            <p className="text-[0.8rem] md:text-sm leading-relaxed text-slate-800">
+                            <p className="text-[0.8rem] md:text-sm leading-relaxed" style={{ color: TEXT }}>
                                 {item.description}
                             </p>
                         </motion.article>
@@ -183,80 +220,95 @@ export default function ProductsPage({ className = "" }: ProductsPageProps) {
 
     return (
         <main dir="rtl" className={`py-10 md:py-14 ${className}`}>
-            <div className="max-w-5xl mx-auto px-4">
-                {/* Header */}
+            <div className="max-w-5xl px-4 mx-auto">
                 <motion.header
-                    className="mb-8 md:mb-10 text-center"
+                    className="relative mb-8 text-center md:mb-10"
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.4 }}
                     variants={fadeUp}
                     custom={0}
                 >
+                    <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
+                        <div
+                            className="h-44 w-[min(760px,92vw)] rounded-full blur-3xl opacity-70"
+                            style={{
+                                background:
+                                    "radial-gradient(circle at 50% 45%, rgba(233,211,126,0.22), rgba(233,186,108,0.12), rgba(184,130,72,0.06), transparent 70%)",
+                            }}
+                        />
+                    </div>
+
                     <motion.h1
-                        className="text-xl md:text-2xl font-semibold mb-3"
-                        style={{ color: ACCENT }}
+                        className="mb-3 text-xl font-semibold md:text-2xl"
+                        style={{ color: SILVER }}
                         variants={fadeUp}
                         custom={0}
                     >
                         מוצרי פתרונות החניה שאנחנו מתחזקים
                     </motion.h1>
 
-                    <motion.div
-                        className="flex items-center justify-center gap-2 mb-3"
-                        variants={fadeUp}
-                        custom={1}
-                    >
-                        <span className="w-2 h-2 rounded-full bg-brand-soft" />
+                    <motion.div className="flex items-center justify-center gap-2 mb-3" variants={fadeUp} custom={1}>
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "rgba(233,211,126,0.45)" }} />
                         <motion.span
                             className="h-[3px] w-28 md:w-32 rounded-full"
                             style={{
-                                backgroundImage:
-                                    "linear-gradient(90deg, rgba(26,42,128,0), rgba(26,42,128,0.95), rgba(26,42,128,0))",
+                                backgroundImage: `linear-gradient(90deg, rgba(184,130,72,0), ${GOLD_1}, ${GOLD_2}, ${GOLD_3}, rgba(184,130,72,0))`,
                                 backgroundSize: "200% 100%",
+                                opacity: 0.9,
                             }}
-                            animate={{
-                                backgroundPositionX: ["0%", "100%", "0%"],
-                            }}
-                            transition={{
-                                duration: 7,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
+                            animate={{ backgroundPositionX: ["0%", "100%", "0%"] }}
+                            transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
                         />
-                        <span className="w-2 h-2 rounded-full bg-brand-soft" />
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "rgba(233,211,126,0.45)" }} />
                     </motion.div>
 
                     <motion.p
-                        className="text-sm md:text-base max-w-3xl mx-auto leading-relaxed"
+                        className="max-w-3xl mx-auto text-sm leading-relaxed md:text-base"
                         style={{ color: TEXT }}
                         variants={fadeUp}
                         custom={2}
                     >
-                        הצוות שלנו מתמחה בתחזוקה ותיקון של מגוון מתקני חניה, מכניים, חצי אוטומטיים
-                        ואוטומטיים, כולל המוצרים של מעולה פתרונות החניה ומתקנים נוספים הקיימים בשוק
-                        הישראלי.
+                        הצוות שלנו מתמחה בתחזוקה ותיקון של מגוון מתקני חניה, מכניים, חצי אוטומטיים ואוטומטיים, כולל המוצרים של
+                        מעולה פתרונות החניה ומתקנים נוספים הקיימים בשוק הישראלי.
+                    </motion.p>
+
+                    <motion.p className="mt-2 text-[0.8rem]" style={{ color: MUTED }} variants={fadeUp} custom={3}>
+                        זיהוי מהיר. התאמה נכונה. שקט תפעולי.
                     </motion.p>
                 </motion.header>
 
-                {/* Categories */}
-                <div className="space-y-6 md:space-y-7 mb-9 md:mb-11">
+                <motion.div
+                    className="space-y-6 md:space-y-7 mb-9 md:mb-11"
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.25 }}
+                    variants={fadeUp}
+                    custom={0}
+                >
                     {CATEGORIES.map((category, index) => (
                         <CategoryCard key={category.title} category={category} index={index} />
                     ))}
-                </div>
+                </motion.div>
 
-                {/* Button to reopen floating CTA */}
                 <section className="flex justify-center mb-4 md:mb-6">
                     <motion.button
                         type="button"
                         onClick={() => setShowFloatingCta(true)}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-[0.85rem] font-semibold bg-white text-brand-dark hover:bg-slate-50 shadow-md shadow-slate-900/30 border border-slate-200/80 transition"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-[0.85rem] font-semibold border backdrop-blur-md transition"
+                        style={{
+                            color: "rgba(255,255,255,0.92)",
+                            borderColor: "rgba(233,211,126,0.24)",
+                            backgroundImage: "linear-gradient(90deg, rgba(30,31,36,0.55), rgba(30,31,36,0.30))",
+                            boxShadow: "0 16px 34px rgba(0,0,0,0.40)",
+                        }}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: false, amount: 0.5 }}
                         variants={fadeUp}
                         custom={0}
+                        whileHover={{ y: -1 }}
+                        whileTap={{ scale: 0.98 }}
                     >
                         <FaWhatsapp className="text-base" />
                         <span>פתחו שוב את הודעת זיהוי המתקן</span>
@@ -264,7 +316,6 @@ export default function ProductsPage({ className = "" }: ProductsPageProps) {
                 </section>
             </div>
 
-            {/* Floating CTA like MaintenancePage */}
             {showFloatingCta && (
                 <motion.div
                     className="fixed bottom-4 right-4 z-40 max-w-xs w-[320px]"
@@ -272,35 +323,85 @@ export default function ProductsPage({ className = "" }: ProductsPageProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, ease: easeCurve }}
                 >
-                    <div className="relative rounded-3xl bg-gradient-to-r from-brand-dark/95 via-brand to-brand/90 px-5 py-4 text-white shadow-[0_22px_45px_rgba(15,23,42,0.6)] flex flex-col items-center text-center">
+                    <div
+                        className="relative rounded-3xl border px-5 py-4 text-white shadow-[0_22px_45px_rgba(0,0,0,0.70)] flex flex-col items-center text-center backdrop-blur-md overflow-hidden"
+                        style={{
+                            backgroundImage: "linear-gradient(135deg, rgba(30,31,36,0.78), rgba(30,31,36,0.52))",
+                            borderColor: "rgba(233,211,126,0.26)",
+                        }}
+                    >
+                        <div aria-hidden className="absolute inset-0 pointer-events-none">
+                            <div
+                                className="absolute -top-10 left-1/2 -translate-x-1/2 h-40 w-[340px] rounded-full blur-3xl opacity-75"
+                                style={{
+                                    background:
+                                        "radial-gradient(circle at 50% 35%, rgba(233,211,126,0.20), rgba(233,186,108,0.12), transparent 70%)",
+                                }}
+                            />
+                            <div
+                                className="absolute -bottom-12 left-1/2 -translate-x-1/2 h-40 w-[320px] rounded-full blur-3xl opacity-55"
+                                style={{
+                                    background:
+                                        "radial-gradient(circle at 50% 65%, rgba(207,210,214,0.10), rgba(184,130,72,0.08), transparent 72%)",
+                                }}
+                            />
+                        </div>
+
                         <button
                             type="button"
                             onClick={() => setShowFloatingCta(false)}
-                            className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-white/90 text-[0.8rem] text-brand-dark flex items-center justify-center shadow-md hover:bg-slate-100"
+                            className="absolute top-3 left-3 z-20 h-9 w-9 rounded-full border text-[0.95rem] flex items-center justify-center shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(233,211,126,0.35)]"
+                            style={{
+                                backgroundImage: "linear-gradient(180deg, rgba(30,31,36,0.85), rgba(30,31,36,0.55))",
+                                borderColor: "rgba(233,211,126,0.22)",
+                                color: "rgba(255,255,255,0.92)",
+                                boxShadow: "0 12px 22px rgba(0,0,0,0.45)",
+                            }}
                             aria-label="סגירת הודעה"
                         >
                             ✕
                         </button>
 
-                        <h2 className="text-sm md:text-[0.95rem] font-semibold mb-1.5">
-                            לא בטוחים איזה מתקן יש אצלכם?
-                        </h2>
+                        <div className="relative inline-flex items-center gap-2 mb-2">
+                            <span
+                                className="inline-flex items-center justify-center w-8 h-8 border rounded-xl"
+                                style={{
+                                    backgroundImage: "linear-gradient(135deg, rgba(233,211,126,0.20), rgba(233,186,108,0.10))",
+                                    borderColor: "rgba(233,211,126,0.22)",
+                                    boxShadow: "0 0 18px rgba(233,211,126,0.14)",
+                                }}
+                            >
+                                <FaShieldAlt className="text-[14px]" />
+                            </span>
 
-                        <p className="text-[0.78rem] text-white/90 mb-3">
-                            שלחו לנו תמונות מהחניון או תכנית חניה, ונזהה יחד את סוג המערכת ונבנה עבורה
-                            תוכנית תחזוקה מתאימה.
+                            <h2 className="text-sm md:text-[0.95rem] font-semibold" style={{ color: "rgba(255,255,255,0.94)" }}>
+                                לא בטוחים איזה מתקן יש אצלכם?
+                            </h2>
+                        </div>
+
+                        <p className="relative text-[0.78rem] mb-3" style={{ color: TEXT }}>
+                            שלחו לנו תמונות מהחניון או תכנית חניה, ונזהה יחד את סוג המערכת ונבנה עבורה תוכנית תחזוקה מתאימה.
                         </p>
 
                         <a
                             href={whatsappLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[0.8rem] font-semibold bg-white hover:bg-slate-50 shadow-md transition"
-                            style={{ color: ACCENT }}
+                            className="relative inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[0.8rem] font-semibold border transition"
+                            style={{
+                                color: "rgba(0,0,0,0.86)",
+                                borderColor: "rgba(233,211,126,0.22)",
+                                backgroundImage: `linear-gradient(90deg, ${GOLD_1}, ${GOLD_2}, ${GOLD_3})`,
+                                boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
+                            }}
                         >
                             <FaWhatsapp className="text-base" />
                             <span>שלחו לנו תמונות או תכנית חניה</span>
                         </a>
+
+                        <p className="relative mt-2 text-[0.72rem]" style={{ color: MUTED }}>
+                            נחזור אליכם עם זיהוי + המלצה
+                        </p>
                     </div>
                 </motion.div>
             )}
