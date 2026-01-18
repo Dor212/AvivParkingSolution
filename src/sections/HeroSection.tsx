@@ -130,7 +130,7 @@ const HeroSection: React.FC = () => {
                         <div className="w-full max-w-[520px] md:max-w-[560px]">
                             <img
                                 key={logoAnimKey}
-                                src="/LOGOUri2.png"
+                                src="/Logos/LOGOUri2.png"
                                 alt="אביב פתרונות חניה"
                                 draggable={false}
                                 className="w-full h-auto select-none drop-shadow-[0_18px_40px_rgba(0,0,0,0.22)]"

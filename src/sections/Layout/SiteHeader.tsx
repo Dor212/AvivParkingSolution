@@ -33,6 +33,7 @@ const SiteHeader: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         closeMobile();
     }, [location.pathname, closeMobile]);
 
@@ -77,7 +78,7 @@ const SiteHeader: React.FC = () => {
                         aria-label="אביב פתרונות חניה"
                     >
                         <img
-                            src="/LOGOUri.png"
+                            src="/Logos/LOGOUri.png"
                             alt="אביב פתרונות חניה"
                             draggable={false}
                             className="w-auto select-none h-9"
